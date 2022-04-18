@@ -57,3 +57,40 @@ var threeSum = function (nums) {
 
   return Array.from(set).map(JSON.parse);
 };
+
+var threeSum = function (nums) {
+  if (!nums || nums.length == 0 || (nums.length == 1 && nums[0] == 0)) {
+    return [];
+  }
+
+  const result = [];
+  const length = nums.length;
+  const sorted = nums.sort((a, b) => a - b);
+
+  for (let i = 0; i < length - 2; i++) {
+    if (i > 0 && sorted[i] == sorted[i - 1]) {
+      continue;
+    }
+
+    let j = i + 1;
+    let k = length - 1;
+
+    while (j < k) {
+      sum = sorted[i] + sorted[j] + sorted[k];
+      if (sum === 0) {
+        result.push([sorted[i], sorted[j], sorted[k]]);
+        k--;
+
+        while (j < k && sorted[k] == sorted[k + 1]) {
+          k--;
+        }
+      } else if (sum > 0) {
+        k--;
+      } else {
+        j++;
+      }
+    }
+  }
+
+  return result;
+};
