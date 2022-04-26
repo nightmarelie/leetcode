@@ -13,3 +13,7 @@ const isPalindrome = function (x) {
 
   return temp === reversed;
 };
+
+const isPalindrome1 = function (x) {
+  return x === +String(x).split("").reverse().join("");
+};
